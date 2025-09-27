@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
+import { catchAsync } from "./middleware/errors";
 
 dotenv.config();
 
@@ -26,5 +27,10 @@ app.get("/", (request, response) => {
 app.get("/status", (request, response) => {
   response.json({ message: "Service healthy" });
 });
+
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).send({ error: err.message })
+})
 
 const server = app.listen(port, () => console.log(`Listening on Port: ${server.address().port}`))
