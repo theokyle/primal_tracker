@@ -1,13 +1,16 @@
 import Topbar from '../components/layout/Topbar';
 import PlayerDashboard from '../components/player/PlayerDashboard';
+import { PlayerProvider } from '../context/PlayerContext';
 
 function PlayerPage() {
 
   return (
-    <main className='flex-1 bg-gray-100'>
-        <Topbar />
-        <PlayerDashboard />
-    </main>
+    <PlayerProvider >
+      <main className='flex-1 bg-gray-100'>
+          <Topbar />
+          <PlayerDashboard />
+      </main>
+    </PlayerProvider>
   )
 }
 

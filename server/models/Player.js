@@ -19,16 +19,17 @@ const defaultPlants = {
 };
 
 const defaultElements = {
-    fire: 0,
-    horn: 0,
-    coral: 0,
-    crystal: 0,
-    thunder: 0,
-    metal: 0,
-    feather: 0,
-    venom: 0,
-    ice: 0
-};
+        fire: 0,
+            horn: 0,
+                coral: 0,
+                    crystal: 0,
+                        thunder: 0,
+                            metal: 0,
+                                feather: 0,
+                                    venom: 0,
+                                        ice: 0
+                                        };
+}
 
 const defaultSkills = {
     a1: false,

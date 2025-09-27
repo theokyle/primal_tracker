@@ -1,11 +1,19 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
+import { samplePlayer } from '../assets/sampleData';
 
-const PlayerContext = createContext();
+export const PlayerContext = createContext();
 
 export const PlayerProvider = ({children}) => {
     const [player, setPlayer] = useState(null);
 
     // UseEffect Hook to fetch data from DB
+    useEffect(() => {
+        try {
+            setPlayer(samplePlayer);
+        } catch (err) {
+            console.error("Error in PlayerProvider useEffect:", err);
+        }
+        }, []);
 
     // Change Player Name
 
@@ -39,8 +47,8 @@ export const PlayerProvider = ({children}) => {
     }
 
     return (
-        <PlayerContext value={value}>
+        <PlayerContext.Provider value={value}>
             {children}
-        </PlayerContext>
+        </PlayerContext.Provider>
     )
 }
