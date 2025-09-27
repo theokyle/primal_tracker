@@ -37,13 +37,29 @@ export const PlayerProvider = ({children}) => {
     }
 
     // Update Player Skills
+    const updateSkill = (name) => {
+        setPlayer(prev => {
+            if (!prev) return prev;
+            
+            const updated = !prev.skills[name];
 
+            return {
+                ...prev,
+                skills: {
+                    ...prev.skills,
+                    [name]: updated
+                }
+            };
+        });
+        
+    }
     //Update Player Equipment
 
     const value = {
         player,
         setPlayer,
-        updateResource
+        updateResource,
+        updateSkill
     }
 
     return (
