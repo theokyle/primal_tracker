@@ -3,11 +3,23 @@ import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router'
 import './index.css'
 import App from './App.jsx'
+import PlayerPage from './pages/PlayerPage.jsx'
+import MainPage from './pages/MainPage.jsx'
+import CampaignPage from './pages/CampaignPage.jsx'
+import EncounterPage from './pages/EncounterPage.jsx'
+import SettingsPage from './pages/SettingsPage.jsx'
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />
+    element: <App />,
+    children: [
+      {index: true, element: <MainPage />},
+      {path: "player", element: <PlayerPage />},
+      {path: "campaign", element: <CampaignPage />},
+      {path: "encounter", element: <EncounterPage />},
+      {path: "settings", element: <SettingsPage />}
+    ]
   }
 ])
 
