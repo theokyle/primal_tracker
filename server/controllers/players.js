@@ -16,3 +16,5 @@ router.put("/:id/resources")
 
 // PUT Update Quests
 router.put("/:id/quests")
+
+export default router;

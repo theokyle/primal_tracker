@@ -59,7 +59,9 @@ const campaignSchema = new mongoose.Schema({
         })
     }},
 
-    achievements: [String]
+    achievements: [String],
+
+    players: [{ type: mongoose.Schema.Types.ObjectId, ref: "Player" }]
 })
 
 const Campaign = mongoose.model("Campaign", campaignSchema);

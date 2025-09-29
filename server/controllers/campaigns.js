@@ -16,3 +16,5 @@ router.put("/:id")
 
 // DELETE - Delete a campaign
 router.delete("/:id")
+
+export default router;

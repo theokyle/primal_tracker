@@ -3,7 +3,7 @@ import { samplePlayer } from '../assets/sampleData';
 
 export const PlayerContext = createContext();
 
-export const PlayerProvider = ({children}) => {
+export function PlayerProvider({children}) {
     const [player, setPlayer] = useState(null);
 
     // UseEffect Hook to fetch data from DB
