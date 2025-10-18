@@ -2,7 +2,8 @@ import { Link } from "react-router";
 import { GiCrestedHelmet } from "react-icons/gi";
 import { FaScroll } from "react-icons/fa";
 import { GiSpikedDragonHead } from "react-icons/gi";
-import { FaGear } from "react-icons/fa6";
+import { FaUserCircle } from "react-icons/fa";
+
 
 
 export default function Navbar({sideBarOpen, setSideBarOpen}) {
@@ -10,7 +11,7 @@ const navItems = [
     {name: "Player", icon: <GiCrestedHelmet />, path: "player"},
     {name: "Campaign", icon: <FaScroll />, path: "campaign"},
     {name: "Encounter", icon: <GiSpikedDragonHead />, path:"encounter"},
-    {name: "Settings", icon: <FaGear />, path:"settings"}
+    {name: "Profile", icon: <FaUserCircle />, path:"profile"}
 ];
 
     return (

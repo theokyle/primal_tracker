@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import api from "../api/api.js";
 
-const UserContext = createContext();
+export const UserContext = createContext();
 
 export function UserProvider({children}) {
     const [user, setUser] = useState(null);

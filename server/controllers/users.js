@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { catchAsync, AppError } from "../middleware/errors";
-import User from "../models/User";
+import { catchAsync, AppError } from "../middleware/errors.js";
+import User from "../models/User.js";
 import passport from "passport";
 
 const router = Router();

@@ -7,7 +7,7 @@ import PlayerPage from './pages/PlayerPage.jsx'
 import MainPage from './pages/MainPage.jsx'
 import CampaignPage from './pages/CampaignPage.jsx'
 import EncounterPage from './pages/EncounterPage.jsx'
-import SettingsPage from './pages/SettingsPage.jsx'
+import ProfilePage from './pages/ProfilePage.jsx'
 
 const router = createBrowserRouter([
   {
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
       {path: "player", element: <PlayerPage />},
       {path: "campaign", element: <CampaignPage />},
       {path: "encounter", element: <EncounterPage />},
-      {path: "settings", element: <SettingsPage />}
+      {path: "profile", element: <ProfilePage />}
     ]
   }
 ])

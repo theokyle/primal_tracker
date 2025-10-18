@@ -1,42 +1,5 @@
 import mongoose from "mongoose";
 
-const defaultElements = {
-    fire: 0,
-    horn: 0,
-    coral: 0,
-    crystal: 0,
-    thunder: 0,
-    metal: 0,
-    feather: 0,
-    venom: 0,
-    ice: 0
-};
-
-const defaultTrophies = {
-    vyraxen: false,
-    toramat: false,
-    korowon: false,
-    felaxir: false,
-    ozew: false,
-    hurom: false,
-    hydar: false,
-    sirkaaj: false,
-    pazis: false,
-    zekath: false,
-    taraska: false,
-    kharia: false,
-    dygorax: false,
-    orouxen: false,
-    morkraas: false,
-    jekoros: false,
-    tarragua: false,
-    reikal: false,
-    mamuraak: false,
-    nagarias: false,
-    zekalith: false,
-    xitheros: false
-}
-
 const questIds = Array.from({ length: 50 }, (_, i) => `quest_${i + 1}`);
 
 const campaignSchema = new mongoose.Schema({
@@ -48,15 +11,49 @@ const campaignSchema = new mongoose.Schema({
 
     forge: { type: Number, default: 1, min: 1, max: 3},
 
-    elements: { type: Map, of: Boolean, default: defaultElements},
+    elements: {
+    fire: {type: Boolean, default: false},
+    horn: {type: Boolean, default: false},
+    coral: {type: Boolean, default: false},
+    crystal: {type: Boolean, default: false},
+    thunder: {type: Boolean, default: false},
+    metal: {type: Boolean, default: false},
+    feather: {type: Boolean, default: false},
+    venom: {type: Boolean, default: false},
+    ice: {type: Boolean, default: false}
+    },
 
-    trophies: { type: Map, of: Boolean, default: defaultTrophies},
+    trophies: {
+    vyraxen: { type: Boolean, default: false},
+    toramat: { type: Boolean, default: false},
+    korowon: { type: Boolean, default: false},
+    felaxir: { type: Boolean, default: false},
+    ozew: { type: Boolean, default: false},
+    hurom: { type: Boolean, default: false},
+    hydar: { type: Boolean, default: false},
+    sirkaaj: { type: Boolean, default: false},
+    pazis: { type: Boolean, default: false},
+    zekath: { type: Boolean, default: false},
+    taraska: { type: Boolean, default: false},
+    kharia: { type: Boolean, default: false},
+    dygorax: { type: Boolean, default: false},
+    orouxen: { type: Boolean, default: false},
+    morkraas: { type: Boolean, default: false},
+    jekoros: { type: Boolean, default: false},
+    tarragua: { type: Boolean, default: false},
+    reikal: { type: Boolean, default: false},
+    mamuraak: { type: Boolean, default: false},
+    nagarias: { type: Boolean, default: false},
+    zekalith: { type: Boolean, default: false},
+    xitheros: { type: Boolean, default: false}
+    },
 
     quests: { type: Map, of: { type: String, enum: ["locked", "unlocked", "completed", "expired"]}, default: function () {
         const map = {};
         questIds.forEach(id => {
             map[id] = "locked"
         })
+        return map;
     }},
 
     achievements: [String],
