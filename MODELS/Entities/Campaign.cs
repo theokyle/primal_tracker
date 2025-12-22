@@ -54,7 +54,7 @@ public class CampaignState
     public bool Pazis { get; set; }
     public bool Nagarjas { get; set; }
     public bool Zekath { get; set; }
-    public bool Sekalith { get; set; }
+    public bool Zekalith { get; set; }
     public bool Taraska { get; set; }
     public bool Xitheros { get; set; }
     public List<int> CompletedQuests { get; set; } = [];
