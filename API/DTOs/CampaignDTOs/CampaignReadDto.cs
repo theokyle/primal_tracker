@@ -1,29 +1,31 @@
+using System;
+using MODELS.Entities;
 
+namespace API.DTOs.CampaignDTOs;
 
-using Microsoft.EntityFrameworkCore;
-
-namespace MODELS.Entities;
-
-public class Campaign
+public class CampaignDto
 {
     public Guid Id { get; set; }
-    public required string Name { get; set; }
-    public Guid UserId { get; set; }
-    public User User { get; set; } = null!;
-
-    public List<Player> Players { get; set; } = [];
-    public CampaignState State { get; set; } = new();
+    public string Name { get; set; } = null!;
+    public CampaignStateDto State { get; set; } = new();
+    public IReadOnlyList<PlayerSummaryDto> Players { get; set; } = [];
 }
 
-[Owned]
-public class CampaignState
+public class CampaignStateDto
 {
-    // Core campaign tracking
-    public int Chapter { get; set; } = 1;
-    public int HerbalistLevel { get; set; } = 1;
-    public int ForgeLevel { get; set; } = 1;
+    public int Chapter { get; set; }
+    public int HerbalistLevel { get; set; }
+    public int ForgeLevel { get; set; }
 
-    // Elements 
+    public CampaignElementsDto Elements { get; set; } = new();
+    public CampaignTrophiesDto Trophies { get; set; } = new();
+
+    public IReadOnlyList<int> CompletedQuests { get; set; } = [];
+    public IReadOnlyList<string> Achievements { get; set; } = [];
+}
+
+public class CampaignElementsDto
+{
     public bool Fire { get; set; }
     public bool Horn { get; set; }
     public bool Crystal { get; set; }
@@ -33,8 +35,10 @@ public class CampaignState
     public bool Feather { get; set; }
     public bool Venom { get; set; }
     public bool Ice { get; set; }
+}
 
-    // Trophies
+public class CampaignTrophiesDto
+{
     public bool Vyraxen { get; set; }
     public bool Kharia { get; set; }
     public bool Toramat { get; set; }
@@ -57,6 +61,11 @@ public class CampaignState
     public bool Zekalith { get; set; }
     public bool Taraska { get; set; }
     public bool Xitheros { get; set; }
-    public List<int> CompletedQuests { get; set; } = [];
-    public List<string> Achievements { get; set; } = [];
+}
+
+public class PlayerSummaryDto
+{
+    public Guid Id { get; set; }
+    public string Name { get; set; } = null!;
+    public PlayerClass Class { get; set; }
 }
