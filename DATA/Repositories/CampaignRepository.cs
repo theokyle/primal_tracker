@@ -32,6 +32,16 @@ public class CampaignRepository(AppDbContext context) : ICampaignRepository
         return await context.Campaigns.Where(x => x.UserId == userId).ToListAsync();
     }
 
+    public async Task<Campaign?> GetCampaignWithPlayersAsync(Guid id)
+    {
+        return await context.Campaigns
+            .Include(c => c.Players)
+                .ThenInclude(p => p.Resources)
+            .Include(c => c.Players)
+                .ThenInclude(p => p.Skills)
+            .FirstOrDefaultAsync(c => c.Id == id);
+    }
+
     public async Task<bool> SaveChangesAsync()
     {
         return await context.SaveChangesAsync() > 0;

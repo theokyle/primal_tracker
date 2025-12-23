@@ -1,4 +1,5 @@
 using System;
+using System.Text.Json.Serialization;
 using MODELS.Entities;
 
 namespace API.DTOs.CampaignDTOs;
@@ -20,7 +21,7 @@ public class CampaignStateDto
     public CampaignElementsDto Elements { get; set; } = new();
     public CampaignTrophiesDto Trophies { get; set; } = new();
 
-    public IReadOnlyList<int> CompletedQuests { get; set; } = [];
+    public IReadOnlyList<QuestDto> Quests { get; set; } = [];
     public IReadOnlyList<string> Achievements { get; set; } = [];
 }
 
@@ -68,4 +69,11 @@ public class PlayerSummaryDto
     public Guid Id { get; set; }
     public string Name { get; set; } = null!;
     public PlayerClass Class { get; set; }
+}
+
+public class QuestDto
+{
+    public int QuestNumber { get; set; }
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    public QuestStatus Status { get; set; }
 }

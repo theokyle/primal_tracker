@@ -12,9 +12,9 @@ namespace API.Controllers;
 public class CampaignsController(ICampaignRepository campaignRepository) : BaseApiController
 {
     [HttpGet]
-    public async Task<ActionResult<IReadOnlyList<Campaign>>> GetCampaigns()
+    public async Task<ActionResult<IReadOnlyList<CampaignDto>>> GetCampaigns()
     {
-        var userId = User.GetMemberId();
+        var userId = User.GetId();
 
         var campaigns = await campaignRepository.GetCampaignsAsync(userId);
 
@@ -24,7 +24,7 @@ public class CampaignsController(ICampaignRepository campaignRepository) : BaseA
     [HttpGet("{id:guid}")]
     public async Task<ActionResult<CampaignDto>> GetCampaign(Guid id)
     {
-        var userId = User.GetMemberId();
+        var userId = User.GetId();
 
         var campaign = await campaignRepository.GetCampaignByIdAsync(id);
 
@@ -36,7 +36,7 @@ public class CampaignsController(ICampaignRepository campaignRepository) : BaseA
     [HttpPost]
     public async Task<ActionResult<CampaignDto>> CreateCampaign(CreateCampaignDto dto)
     {
-        var userId = User.GetMemberId();
+        var userId = User.GetId();
         
         var campaign = new Campaign
         {
@@ -55,7 +55,7 @@ public class CampaignsController(ICampaignRepository campaignRepository) : BaseA
     [HttpPut("{id:guid}")]
     public async Task<ActionResult<CampaignDto>> UpdateCampaign(Guid id, UpdateCampaignStateDto dto)
     {
-        var userId = User.GetMemberId();
+        var userId = User.GetId();
 
         var campaign = await campaignRepository.GetCampaignByIdAsync(id);
 
@@ -74,7 +74,7 @@ public class CampaignsController(ICampaignRepository campaignRepository) : BaseA
     [HttpDelete("{id:guid}")]
     public async Task<ActionResult> DeleteCampaign(Guid id)
     {
-        var userId = User.GetMemberId();
+        var userId = User.GetId();
 
         var campaign = await campaignRepository.GetCampaignByIdAsync(id);
 

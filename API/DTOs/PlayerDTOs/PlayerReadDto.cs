@@ -1,4 +1,5 @@
 using System;
+using System.Text.Json.Serialization;
 using MODELS.Entities;
 
 namespace API.DTOs.PlayerDTOs;
@@ -7,6 +8,8 @@ public class PlayerDto
 {
     public Guid Id { get; set; }
     public string Name { get; set; } = null!;
+    
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public PlayerClass Class { get; set; }
 
     public PlayerResourcesDto Resources { get; set; } = new();
@@ -47,6 +50,7 @@ public class PlayerResourcesDto
 public class PlayerSkillDto
 {
     public int Id { get; set; }       // Internal DB id
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public SkillCode Skill { get; set; }  // Enum: A-E
     public int Level { get; set; }    // 1-2
 }

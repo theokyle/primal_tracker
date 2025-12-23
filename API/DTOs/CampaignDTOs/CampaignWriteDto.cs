@@ -16,6 +16,6 @@ public class UpdateCampaignStateDto
     public CampaignElementsDto Elements { get; set; } = new();
     public CampaignTrophiesDto Trophies { get; set; } = new();
 
-    public List<int> CompletedQuests { get; set; } = new();
-    public List<string> Achievements { get; set; } = new();
+    public List<QuestDto> Quests { get; set; } = [];
+    public List<string> Achievements { get; set; } = [];
 }

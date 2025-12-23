@@ -10,15 +10,18 @@ public class CreatePlayerDto
     public string Notes { get; set; } = string.Empty;
 
     public PlayerResourcesDto Resources { get; set; } = new();
-    public List<PlayerSkillDto> Skills { get; set; } = new();
+    public List<PlayerSkillDto> Skills { get; set; } = [];
 }
 
 public class UpdatePlayerDto
 {
-    public string? Name { get; set; }            // Nullable for partial updates
+    public string? Name { get; set; }            
     public PlayerClass? Class { get; set; }
     public string? Notes { get; set; }
 
-    public PlayerResourcesDto? Resources { get; set; }
-    public List<PlayerSkillDto>? Skills { get; set; }
+}
+
+public class UpdatePlayerSkillsDto
+{
+    public IReadOnlyList<PlayerSkillDto> Skills { get; set; } = [];
 }

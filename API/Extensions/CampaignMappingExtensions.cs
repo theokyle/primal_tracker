@@ -58,7 +58,7 @@ public static class CampaignMappingExtensions
                     Xitheros = campaign.State.Xitheros
                 },
 
-                CompletedQuests = campaign.State.CompletedQuests?.ToList() ?? [],
+                Quests = [.. campaign.State.Quests.Select(q => new QuestDto { QuestNumber = q.QuestNumber, Status = q.Status })],
                 Achievements = campaign.State.Achievements?.ToList() ?? []
             },
 
@@ -118,7 +118,12 @@ public static class CampaignMappingExtensions
             campaign.State.Xitheros = dto.Trophies.Xitheros;
 
             // Lists
-            campaign.State.CompletedQuests = dto.CompletedQuests ?? [];
+            foreach (var questDto in dto.Quests)
+            {
+                var quest = campaign.State.Quests.FirstOrDefault(q => q.QuestNumber == questDto.QuestNumber);
+                quest?.Status = questDto.Status;
+            }
+
             campaign.State.Achievements = dto.Achievements ?? [];
         }
 }

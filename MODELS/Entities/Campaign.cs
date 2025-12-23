@@ -1,6 +1,7 @@
 
 
 using Microsoft.EntityFrameworkCore;
+using MODELS.Config;
 
 namespace MODELS.Entities;
 
@@ -57,6 +58,28 @@ public class CampaignState
     public bool Zekalith { get; set; }
     public bool Taraska { get; set; }
     public bool Xitheros { get; set; }
-    public List<int> CompletedQuests { get; set; } = [];
+    public List<Quest> Quests { get; set; } = [];
     public List<string> Achievements { get; set; } = [];
+
+    public CampaignState()
+    {
+        for (int i = 1; i <= GameConfig.TotalQuests; i++)
+        {
+            Quests.Add(new Quest {QuestNumber = i});
+        }
+    }
+}
+
+public class Quest
+{
+    public int QuestNumber { get; set; }
+    public QuestStatus Status { get; set; } = QuestStatus.Locked;
+}
+
+public enum QuestStatus
+{
+    Unlocked,
+    Completed,
+    Locked, 
+    Expired
 }

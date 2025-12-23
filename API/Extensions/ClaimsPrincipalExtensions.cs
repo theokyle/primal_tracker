@@ -5,7 +5,7 @@ namespace API.Extensions;
 
 public static class ClaimsPrincipalExtensions
 {
-    public static Guid GetMemberId(this ClaimsPrincipal user)
+    public static Guid GetId(this ClaimsPrincipal user)
     {
         string idValue = user.FindFirstValue(ClaimTypes.NameIdentifier) ?? throw new Exception("User ID claim missing");
 
