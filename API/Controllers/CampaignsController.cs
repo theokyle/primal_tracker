@@ -3,6 +3,7 @@ using API.DTOs.CampaignDTOs;
 using API.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MODELS.Config;
 using MODELS.Entities;
 using MODELS.Interfaces;
 
@@ -37,23 +38,30 @@ public class CampaignsController(ICampaignRepository campaignRepository) : BaseA
     public async Task<ActionResult<CampaignDto>> CreateCampaign(CreateCampaignDto dto)
     {
         var userId = User.GetId();
+
+        var state = new CampaignState();
+        state.Quests = new List<Quest>();
+        for (int i = 1; i <= GameConfig.TotalQuests; i++)
+        {
+            state.Quests.Add(new Quest { QuestNumber = i, Status = QuestStatus.Locked});
+        }
         
         var campaign = new Campaign
         {
             Id = Guid.NewGuid(),
             Name = dto.Name,
-            UserId = userId
+            UserId = userId,
+            State = state
         };
 
         campaignRepository.AddCampaign(campaign);
-        bool success = await campaignRepository.SaveChangesAsync();
-        if (!success) return BadRequest("Unable to create campaign");
+        await campaignRepository.SaveChangesAsync();
         
         return CreatedAtAction("GetCampaign", new {id = campaign.Id}, campaign.ToDto());
     }
 
     [HttpPut("{id:guid}")]
-    public async Task<ActionResult<CampaignDto>> UpdateCampaign(Guid id, UpdateCampaignStateDto dto)
+    public async Task<ActionResult<CampaignDto>> UpdateCampaignState(Guid id, UpdateCampaignStateDto dto)
     {
         var userId = User.GetId();
 
@@ -62,11 +70,9 @@ public class CampaignsController(ICampaignRepository campaignRepository) : BaseA
         if (campaign == null || campaign.UserId != userId)
             return NotFound();
 
-        campaign.UpdateStateFromDto(dto);
+        campaign.State.UpdateFromDto(dto);
 
-        var success = await campaignRepository.SaveChangesAsync();
-        if (!success)
-            return BadRequest("Failed to update campaign");
+        await campaignRepository.SaveChangesAsync();
 
         return Ok(campaign.ToDto());
     }
@@ -83,8 +89,8 @@ public class CampaignsController(ICampaignRepository campaignRepository) : BaseA
 
         campaignRepository.DeleteCampaign(campaign);
 
-        var success = await campaignRepository.SaveChangesAsync();
-        if (!success) return BadRequest("Error deleting campaign");
+        await campaignRepository.SaveChangesAsync();
+    
         return NoContent();
     }
 }

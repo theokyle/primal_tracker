@@ -60,14 +60,6 @@ public class CampaignState
     public bool Xitheros { get; set; }
     public List<Quest> Quests { get; set; } = [];
     public List<string> Achievements { get; set; } = [];
-
-    public CampaignState()
-    {
-        for (int i = 1; i <= GameConfig.TotalQuests; i++)
-        {
-            Quests.Add(new Quest {QuestNumber = i});
-        }
-    }
 }
 
 public class Quest
