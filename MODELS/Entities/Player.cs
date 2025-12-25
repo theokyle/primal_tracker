@@ -18,9 +18,12 @@ public class Player
 
 public enum PlayerClass
 {
-    Hunter,
-    Guardian,
-    Tactician
+    Dareon,
+    Mirah,
+    Thoreg,
+    Karah,
+    Heleren,
+    Ljonar
 }
 
 [Owned]

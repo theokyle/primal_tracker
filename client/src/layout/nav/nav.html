@@ -1,0 +1,33 @@
+<header class="p-3 w-full fixed top-0 z-50 bg-linear-to-r from-white to-neutral">
+  <div class="flex align-middle items-center px-10 mx-auto gap-6">
+    <a routerLink='/' class="flex items-center border-r-white border-r-2 pr-6">
+        <img src="./primal_tracker_logo.png" class="h-20 w-auto object-contain">
+    </a>
+
+    <nav class="flex gap-3 my-2 uppercase text-2xl text-black">
+        @if (accountService.currentUser()) {
+          <a>Campaigns</a>
+          <a>Players</a>
+        }
+    </nav>
+
+    @if (accountService.currentUser(); as user){
+      <div class="dropdown dropdown-end ml-auto">
+        <div tabindex="0" role="button" class="flex items-center text-white text-xl gap-3 cursor-pointer">
+            <img [src]="user?.imageUrl || './user.png'" alt="user avatar" class="w-10 h-10 rounded-full">
+            <span>{{ user.userName }}</span>
+        </div>
+        <ul tabindex="-1" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+            <li><a routerLink="/members/{{user.id}}">Edit Profile</a></li>
+            <li><a (click)="logout()">Logout</a></li>
+        </ul>
+      </div>
+    } @else {
+      <form #loginForm="ngForm" (ngSubmit)="login()" class="flex ml-auto items-center gap-3">
+          <input [(ngModel)]="creds.email" name="email" class="input" placeholder="Email">
+          <input [(ngModel)]="creds.password" name="password" class="input" placeholder="Password">
+          <button class="btn" type="submit">Login</button>
+      </form>
+    }
+  </div>
+</header>

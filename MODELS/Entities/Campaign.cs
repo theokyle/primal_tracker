@@ -1,13 +1,14 @@
 
 
 using Microsoft.EntityFrameworkCore;
+using MODELS.Config;
 
 namespace MODELS.Entities;
 
 public class Campaign
 {
     public Guid Id { get; set; }
-    public string Name { get; set; } = null!;
+    public required string Name { get; set; }
     public Guid UserId { get; set; }
     public User User { get; set; } = null!;
 
@@ -54,9 +55,23 @@ public class CampaignState
     public bool Pazis { get; set; }
     public bool Nagarjas { get; set; }
     public bool Zekath { get; set; }
-    public bool Sekalith { get; set; }
+    public bool Zekalith { get; set; }
     public bool Taraska { get; set; }
     public bool Xitheros { get; set; }
-    public List<int> CompletedQuests { get; set; } = [];
+    public List<Quest> Quests { get; set; } = [];
     public List<string> Achievements { get; set; } = [];
+}
+
+public class Quest
+{
+    public int QuestNumber { get; set; }
+    public QuestStatus Status { get; set; } = QuestStatus.Locked;
+}
+
+public enum QuestStatus
+{
+    Unlocked,
+    Completed,
+    Locked, 
+    Expired
 }
