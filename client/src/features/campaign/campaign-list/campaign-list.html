@@ -1,0 +1,30 @@
+<div class="min-h-screen flex flex-col justify-center">
+  <div class="w-3/4 p-10 mx-auto rounded-box bg-base-100">
+    <div class="mx-auto grid max-w-7xl grid-cols-1 gap-6">
+
+      <div class="mb-8 flex items-center justify-between">
+        <div>
+          <h1 class="text-3xl font-bold text-neutral">
+            Campaigns
+          </h1>
+          <p class="mt-1 text-sm opacity-70">
+            Manage and track your ongoing adventures
+          </p>
+        </div>
+      </div>
+
+      @for (campaign of campaigns$ | async; track campaign.id) {
+        <app-campaign-card [campaign]="campaign" />
+      }
+
+      <div
+          class="card bg-base-200 cursor-pointer shadow-md hover:shadow-xl transition-all duration-300
+          hover:-translate-y-1 focus-visible:ring focus-visible:ring-primary"
+          tabindex="0">
+          <div class="card-body">
+                  <h2 class="card-title text-primary">Create a New Campaign</h2>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

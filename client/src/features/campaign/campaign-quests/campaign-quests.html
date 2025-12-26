@@ -1,0 +1,25 @@
+@if(campaignService.currentCampaign()?.state; as campaign)
+{
+    <div class="card-body gap-6">
+
+    <!-- Header -->
+    <h2 class="card-title text-2xl text-primary">Campaign Status</h2>
+
+    <!-- Quests -->
+    <section>
+        <h3 class="text-lg mb-5">Quests</h3>
+        <div class="grid grid-cols-10 gap-5 w-1/2">
+            @for (quest of campaign.quests; track $index) {
+                <div class="w-8 h-8 flex items-center justify-center rounded-md border border-base-300 text-sm font-semibold"
+                            [class.bg-base-100]="quest.status == questStatus.Locked"
+                            [class.bg-success]="quest.status == questStatus.Completed"
+                            [class.bg-accent]="quest.status == questStatus.Unlocked"
+                            [class.bg-neutral]="quest.status == questStatus.Expired">
+                    {{ quest.questNumber }}
+                </div>
+            }
+        </div>
+    </section>
+
+    </div>
+}
