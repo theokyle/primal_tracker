@@ -1,33 +1,49 @@
-<header class="p-3 w-full fixed top-0 z-50 bg-linear-to-r from-white to-neutral">
-  <div class="flex align-middle items-center px-10 mx-auto gap-6">
-    <a routerLink='/' class="flex items-center border-r-white border-r-2 pr-6">
-        <img src="./primal_tracker_logo.png" class="h-20 w-auto object-contain">
+<header class="fixed top-0 z-50 w-full h-20 bg-gradient-to-r from-white to-neutral shadow-md">
+  <div class="flex h-full items-center px-6 gap-6">
+
+    <a routerLink="/" class="flex items-center pr-6 border-r border-base-300 hover:opacity-80 transition">
+      <img src="./primal_tracker_logo.png" class="h-14 w-auto object-contain">
     </a>
 
-    <nav class="flex gap-3 my-2 uppercase text-2xl text-black">
-        @if (accountService.currentUser()) {
-          <a>Campaigns</a>
-          <a>Players</a>
-        }
+    <nav class="flex gap-6 uppercase text-lg font-semibold text-neutral">
+      @if (accountService.currentUser()) {
+        <a
+          routerLink="/campaigns"
+          routerLinkActive="text-primary border-b-2 border-primary"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="pb-1 transition-colors hover:text-primary"
+        >
+          Campaigns
+        </a>
+        <a class="pb-1 hover:text-primary transition">Players</a>
+      }
     </nav>
 
-    @if (accountService.currentUser(); as user){
+    @if (accountService.currentUser(); as user) {
       <div class="dropdown dropdown-end ml-auto">
-        <div tabindex="0" role="button" class="flex items-center text-white text-xl gap-3 cursor-pointer">
-            <img [src]="user?.imageUrl || './user.png'" alt="user avatar" class="w-10 h-10 rounded-full">
-            <span>{{ user.userName }}</span>
+        <div
+          tabindex="0"
+          role="button"
+          class="flex items-center gap-3 rounded-lg px-3 py-2
+                 text-neutral hover:bg-base-200 transition cursor-pointer"
+        >
+          <img [src]="user.imageUrl || './user.png'" class="w-9 h-9 rounded-full ring-2 ring-primary/30">
+          <span class="font-medium text-white">{{ user.userName }}</span>
         </div>
-        <ul tabindex="-1" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-            <li><a routerLink="/members/{{user.id}}">Edit Profile</a></li>
-            <li><a (click)="logout()">Logout</a></li>
+
+        <ul class="dropdown-content menu bg-base-100 rounded-box z-50 w-52 p-2 shadow">
+          <li><a routerLink="/members/{{user.id}}">Edit Profile</a></li>
+          <li><a (click)="logout()">Logout</a></li>
         </ul>
       </div>
     } @else {
-      <form #loginForm="ngForm" (ngSubmit)="login()" class="flex ml-auto items-center gap-3">
-          <input [(ngModel)]="creds.email" name="email" class="input" placeholder="Email">
-          <input [(ngModel)]="creds.password" name="password" class="input" placeholder="Password">
-          <button class="btn" type="submit">Login</button>
+      <form #loginForm="ngForm" (ngSubmit)="login()" class="flex ml-auto items-center gap-2">
+        <input [(ngModel)]="creds.email" name="email" class="input input-sm input-bordered" placeholder="Email">
+        <input [(ngModel)]="creds.password" name="password" class="input input-sm input-bordered" placeholder="Password">
+        <button class="btn btn-sm btn-primary">Login</button>
       </form>
     }
+
   </div>
 </header>
+

@@ -1,0 +1,62 @@
+@if(campaignService.currentCampaign()?.state; as campaign)
+{
+    <div class="card-body flex flex-col items-stretch gap-6">
+
+    <!-- Header -->
+    <h2 class="card-title text-2xl text-primary">Campaign Status</h2>
+
+    <!-- Chapters -->
+    <section>
+        <h3 class="font-semibold text-lg mb-2">Chapters</h3>
+        <div class="flex gap-2 flex-wrap">
+            @for (isActive of chapters(); track $index) {
+                <div class="w-8 h-8 flex items-center justify-center rounded-md border border-base-300 text-sm font-semibold
+                            bg-base-100" [ngClass]="isActive ? 'bg-primary text-primary-content' : 'bg-base-100'" >
+                    {{ $index + 1}}
+                </div>
+            }
+        </div>
+    </section>
+
+    <!-- Faction Progress -->
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Herbalist -->
+        <div>
+            <h3 class="font-semibold text-lg mb-2">The Herbalist</h3>
+            <div class="flex gap-2">
+                @for (isActive of herbalist(); track $index) {
+                    <div class="px-3 py-2 rounded-md border text-sm" [ngClass]="isActive ? 'bg-primary text-primary-content' : 'bg-base-100'">Lvl {{$index + 1}}</div>
+                }
+            </div>
+        </div>
+
+        <!-- Forge -->
+        <div>
+        <h3 class="font-semibold text-lg mb-2">The Forge</h3>
+        <div class="flex gap-2">
+                @for (isActive of forge(); track $index) {
+                    <div class="px-3 py-2 rounded-md border text-sm" [ngClass]="isActive ? 'bg-primary text-primary-content' : 'bg-base-100'">Lvl {{$index + 1}}</div>
+                }
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Elements -->
+    <section>
+        <h3 class="font-semibold text-lg mb-2">Elements</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+
+        @for (element of campaign.elements | keyvalue; track $index) {
+            <div class="flex items-center gap-2">
+            <div class="w-5 h-5 rounded border" [ngClass]="element.value ? 'bg-primary' : 'bg-base-100'"></div>
+            <span>{{ element.key | titlecase }}</span>
+        </div>
+        }
+
+        </div>
+    </section>
+
+    </div>
+}

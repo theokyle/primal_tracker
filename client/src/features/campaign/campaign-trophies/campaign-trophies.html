@@ -1,0 +1,24 @@
+@if(campaignService.currentCampaign()?.state; as campaign)
+{
+    <div class="card-body gap-6">
+
+    <!-- Header -->
+    <h2 class="card-title text-2xl text-primary">Campaign Trophies</h2>
+
+    <!-- Trophies -->
+    <section>
+        <h3 class="font-semibold text-lg mb-5">Trophies</h3>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-7">
+
+        @for (trophy of campaign.trophies | keyvalue; track $index) {
+            <div class="flex items-center gap-2">
+                <div class="w-5 h-5 rounded border" [ngClass]="trophy.value ? 'bg-primary' : 'bg-base-100'"></div>
+                <span>{{ trophy.key | titlecase }}</span>
+            </div>
+        }
+
+        </div>
+    </section>
+
+    </div>
+}

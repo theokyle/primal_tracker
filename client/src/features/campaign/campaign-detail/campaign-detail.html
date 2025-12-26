@@ -1,0 +1,25 @@
+@if (campaignService.currentCampaign(); as campaign) {
+    <div class="flex gap-6 mt-25 mx-10">
+        <div class="card bg-base-100 flex flex-col h-[85vh] w-1/4 pt-10">
+            <h1 class="text-3xl text-primary mx-auto">{{campaign.name}}</h1>
+            <div class="card-body">
+                <div class="flex flex-col items-center">
+                    <div class="flex text-2xl text-accent">Current Chapter: {{campaign.state.chapter}}</div>
+                </div>
+                <ul class="menu rounded-box w-full text-xl">
+                    <li><a routerLink="status" routerLinkActive="text-primary">Status</a></li>
+                    <li><a routerLink="trophies" routerLinkActive="text-primary">Trophies</a></li>
+                    <li><a routerLink="quests" routerLinkActive="text-primary">Quests</a></li>
+                    <li><a routerLink="achievements" routerLinkActive="text-primary">Achievements</a></li>
+                </ul>
+            </div>
+            <div class="card-actions justify-between gap-2 px-2 mb-3">
+                <button class="btn btn-info flex-1" routerLink="/campaigns">Go Back</button>
+                <button class="btn btn-info flex-1">Edit</button>
+            </div>
+        </div>
+        <div class="card bg-base-100 w-3/4 p-6">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+}
