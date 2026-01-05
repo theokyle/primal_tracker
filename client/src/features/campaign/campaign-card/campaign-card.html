@@ -4,9 +4,12 @@
          hover:-translate-y-1 focus-visible:ring focus-visible:ring-primary"
         tabindex="0"
         routerLink="/campaigns/{{campaign.id}}">
-        <div class="card-body">
+        <div class="card-body relative">
                 <h2 class="card-title text-primary">{{campaign.name}}</h2>
                 <p class="text-sm">Current chapter: {{campaign.state.chapter}}</p>
+                <app-delete-button 
+                (clickEvent)="deleteCampaign(campaign)"
+                class="absolute top-1 right-1"></app-delete-button>
         </div>
     </div>
 }

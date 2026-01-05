@@ -31,7 +31,7 @@
           <span class="font-medium text-white">{{ user.userName }}</span>
         </div>
 
-        <ul class="dropdown-content menu bg-base-100 rounded-box z-50 w-52 p-2 shadow">
+        <ul tabindex="-1" class="dropdown-content menu bg-base-100 rounded-box z-50 w-52 p-2 shadow">
           <li><a routerLink="/members/{{user.id}}">Edit Profile</a></li>
           <li><a (click)="logout()">Logout</a></li>
         </ul>

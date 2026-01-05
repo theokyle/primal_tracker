@@ -13,7 +13,7 @@
         </div>
       </div>
 
-      @for (campaign of campaigns$ | async; track campaign.id) {
+      @for (campaign of this.campaignService.campaigns(); track campaign.id) {
         <app-campaign-card [campaign]="campaign" />
       }
 

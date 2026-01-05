@@ -19,6 +19,7 @@ export class Nav {
     this.accountService.login(this.creds).subscribe({
       next: () => {
         this.creds = { email: "", password: ""};
+        this.router.navigateByUrl("campaigns")
       },
       error: error => {
         console.log(error);
